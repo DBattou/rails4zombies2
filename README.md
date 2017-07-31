@@ -45,3 +45,38 @@ end
 ```
 rake db:rollback
 ```
+
+```ruby
+# Add category_name column and rename the status column from status to message 
+class AddLocationToTweets < ActiveRecord::Migration
+  def change
+    add_column :tweets, :location, :string, limit: 30
+    add_column :tweets, :show_location, :boolean, default: false
+    add_column :tweets, :category_name, :string
+    rename_column :tweets, :status, :message
+  end 
+end
+```
+
+```ruby
+# On second thought, that category_name string column was a bad idea. Write a migration to remove the category_name column.
+class RemoveCategoryNameFromTweets < ActiveRecord::Migration
+  def up
+    remove_column :tweets, :category_name
+  end
+
+  def down
+    add_column :tweets, :category_name, :string
+  end
+end
+```
+
+```
+# Create db, load schema & seed
+rake db:setup
+# Enter rails console
+rails console
+# Plays with tweets
+Tweet.create(status: "coucou", zombie_id: 3)
+```
+
