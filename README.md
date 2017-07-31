@@ -41,3 +41,7 @@ class AddLocationToTweets < ActiveRecord::Migration
   end
 end
 ```
+
+```
+rake db:rollback
+```
