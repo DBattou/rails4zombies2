@@ -30,3 +30,14 @@ rake db:migrate
 rails s
 rails g migration AddPrivacyToTweets private:boolean
 ```
+
+
+```ruby
+#Create migration by hand that adds two fields to the tweets table: a location string field which has a limit of 30 and a boolean field called show_location which defaults to false.
+class AddLocationToTweets < ActiveRecord::Migration
+  def change
+    add_column :tweets, :location, :string, limit: 30
+    add_column :tweets, :show_location, :boolean, default: false
+  end
+end
+```
